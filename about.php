@@ -16,6 +16,8 @@ if (!$content) {
 //hyhyn
 //tyhytnyn
 //hyhyn
+//helloooo
+//bhaktiiii hereeeee
 
 $imagePath = 'admin/admin/' . ($content['image_path']);
 
