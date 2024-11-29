@@ -12,6 +12,10 @@ if (!$content) {
     echo "Error fetching data: " . mysqli_error($conn);
     exit;
 }
+//tyhytnyn
+//hyhyn
+//tyhytnyn
+//hyhyn
 
 $imagePath = 'admin/admin/' . ($content['image_path']);
 
@@ -20,7 +24,7 @@ if (!file_exists($imagePath)) {
     echo "File does not exist: $imagePath";
     exit; // Stop execution if file doesn't exist
 }
-
+    
 ?>
 
 <!doctype html>
