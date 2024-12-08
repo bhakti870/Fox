@@ -90,7 +90,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="planDropdown">
               <a class="dropdown-item" href="plan.php">
-                <i class="material-icons">add</i> Admin Plan
+                <i class="material-icons">add</i> Plan Details
               </a>
               <a class="dropdown-item" href="user_plan.php">
                 <i class="material-icons">add</i> User Plan
@@ -154,6 +154,13 @@
             <a class="nav-link" href="admin_manage_contact.php">
               <i class="material-icons">phone</i>
               <p>Contact Us</p>
+            </a>
+          </li>
+
+          <li class="nav-item ">
+            <a class="nav-link" href="promo.php">
+              <i class="material-icons">account_circle</i>
+              <p>Promo Code</p>
             </a>
           </li>
 

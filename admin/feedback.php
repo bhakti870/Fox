@@ -38,8 +38,8 @@ include "topheader.php";
     <div class="container-fluid">
         <div class="col-md-14">
             <div class="float-right">
-                <a href="addfeedback.php" class="btn btn-success">Add +</a>
-                <a href="feedback.php" class="btn btn-primary">Back</a>
+                <!-- <a href="addfeedback.php" class="btn btn-success">Add +</a> -->
+                <!-- <a href="feedback.php" class="btn btn-primary">Back</a> -->
                 <br><br><br>
             </div>
             <div class="card">
@@ -164,4 +164,3 @@ include "footer.php";
         color: #666;
     }
 </style>
-w

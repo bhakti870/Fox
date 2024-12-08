@@ -35,7 +35,7 @@ include "topheader.php";
             </div>
       <div class="card ">
         <div class="card-header card-header-primary">
-          <h2 class="card-title">User Plan List</h2>
+          <h2 class="card-title">Workout List</h2>
           <div class="float-right">
             <form action="" method="get" class="form-inline">
               <div class="form-group">
@@ -90,7 +90,7 @@ include "topheader.php";
 
         echo"<td>
         <a class=' btn btn-success' href='edituser_plan.php?id=$id&action=edit'>Edit</a>
-        <a class=' btn btn-success' href='user_plan.php?id=$id&action=delete'>Delete</a>
+        <a class=' btn btn-danger' href='user_plan.php?id=$id&action=delete'>Delete</a>
         </td></tr>";
         }
         mysqli_close($con);

@@ -31,8 +31,8 @@ if(isset($_POST['btn_save'])) {
     }
 
     if (count($errors) == 0) {
-        $stmt = $con->prepare("INSERT INTO `user_membership`(`id`, `Name`, `Amount`,`Date`) VALUES (NULL, ?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $Name, $Amount,  $Date);
+        $stmt = $con->prepare("INSERT INTO `user_membership`(`id`, `Name`, `Amount`,`Date`) VALUES (NULL, ?, ?, ?)");
+        $stmt->bind_param("sss", $Name, $Amount,  $Date);
 
         $stmt->execute();
 
@@ -41,6 +41,9 @@ if(isset($_POST['btn_save'])) {
     }
 }
 ?>
+
+
+
 
 
       <!-- End Navbar -->

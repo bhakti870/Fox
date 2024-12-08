@@ -36,8 +36,8 @@ include "topheader.php";
     <div class="container-fluid">
         <div class="col-md-14">
             <div class="float-right">
-                <a href="adduser_membership.php" class="btn btn-success">Add +</a>
-                <a href="user_membership.php" class="btn btn-primary">Back</a>
+                <!-- <a href="adduser_membership.php" class="btn btn-success">Add +</a> -->
+                <!-- <a href="user_membership.php" class="btn btn-primary">Back</a> -->
                 <br><br><br>
             </div>
             <div class="card">
@@ -76,7 +76,7 @@ include "topheader.php";
                                     echo "<tr>
                                             <td>$id</td>
                                             <td>$name</td>
-                                            <td>$amount</td>
+                                            <td>$amount ₹</td>
                                             <td>$user_id</td>
                                             <td>$membership_id</td>
                                             <td>$date</td>

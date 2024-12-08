@@ -28,6 +28,7 @@ if (isset($_POST['edit'])) {
 include "sidenav.php";
 include "topheader.php";
 ?>
+
 <!-- End Navbar -->
 <div class="content">
     <div class="container-fluid">
@@ -35,26 +36,28 @@ include "topheader.php";
             <div class="card-header card-header-primary">
                 <h5 class="title">Edit User Membership</h5>
             </div>
-            <form action="edituser_membership.php?id=<?php echo $id; ?>" name="form" method="post" enctype="multipart/form-data">
+            <form action="edituser_membership.php?id=<?php echo $id; ?>" name="form" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                 <div class="card-body">
                     <input type="hidden" name="id" id="id" value="<?php echo $id; ?>" />
-                    <div class="col-md-12 ">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label>Name</label>
                             <input type="text" id="Name" name="Name" class="form-control" value="<?php echo $Name; ?>">
+                            <span id="nameError" style="color: red;"></span>
                         </div>
                     </div>
-                    <div class="col-md-12 ">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label>Amount</label>
                             <input type="number" id="Amount" name="Amount" class="form-control" value="<?php echo $Amount; ?>">
+                            <span id="amountError" style="color: red;"></span>
                         </div>
                     </div>
-                   
-                    <div class="col-md-12 ">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label>Date</label>
                             <input type="date" id="Date" name="Date" class="form-control" value="<?php echo $Date; ?>">
+                            <span id="dateError" style="color: red;"></span>
                         </div>
                     </div>
                 </div>
@@ -69,3 +72,38 @@ include "topheader.php";
 <?php
 include "footer.php";
 ?>
+
+<script>
+    function validateForm() {
+        let isValid = true;
+
+        // Name validation
+        let name = document.getElementById('Name').value;
+        if (name === "" || name.length < 3 || name.length > 50) {
+            document.getElementById('nameError').innerText = "Name must be between 3 and 50 characters.";
+            isValid = false;
+        } else {
+            document.getElementById('nameError').innerText = "";
+        }
+
+        // Amount validation
+        let amount = document.getElementById('Amount').value;
+        if (amount === "" || amount <= 0) {
+            document.getElementById('amountError').innerText = "Amount must be a positive number.";
+            isValid = false;
+        } else {
+            document.getElementById('amountError').innerText = "";
+        }
+
+        // Date validation
+        let date = document.getElementById('Date').value;
+        if (date === "") {
+            document.getElementById('dateError').innerText = "Date is required.";
+            isValid = false;
+        } else {
+            document.getElementById('dateError').innerText = "";
+        }
+
+        return isValid;
+    }
+</script>

@@ -57,7 +57,7 @@ include "topheader.php";
 <!-- End Navbar -->
 <div class="content">
     <div class="container-fluid">
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -69,49 +69,64 @@ include "topheader.php";
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Name</label>
-                                        <input type="text" id="name" required name="name" value="<?php echo $name; ?>" class="form-control">
+                                        <input type="text" id="name" name="name" value="<?php echo $name; ?>" class="form-control">
+                                        <span id="nameError" style="color: red;"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Contact</label>
-                                        <input type="text" id="contact" required name="contact" value="<?php echo $contact; ?>" class="form-control">
+                                        <input type="text" id="contact" name="contact" value="<?php echo $contact; ?>" class="form-control">
+                                        <span id="contactError" style="color: red;"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>City</label>
-                                        <input type="text" id="city" required name="city" value="<?php echo $city; ?>" class="form-control">
+                                        <input type="text" id="city" name="city" value="<?php echo $city; ?>" class="form-control">
+                                        <span id="cityError" style="color: red;"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Address</label>
-                                        <input type="text" id="address" required name="address" value="<?php echo $address; ?>" class="form-control">
+                                        <input type="text" id="address" name="address" value="<?php echo $address; ?>" class="form-control">
+                                        <span id="addressError" style="color: red;"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Experience</label>
-                                        <input type="text" id="experience" required name="experience" value="<?php echo $experience; ?>" class="form-control">
+                                        <input type="text" id="experience" name="experience" value="<?php echo $experience; ?>" class="form-control">
+                                        <span id="experienceError" style="color: red;"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Bio</label>
-                                        <textarea rows="4" cols="80" id="bio" required name="bio" class="form-control"><?php echo $bio; ?></textarea>
+                                        <textarea rows="4" cols="80" id="bio" name="bio" class="form-control"><?php echo $bio; ?></textarea>
+                                        <span id="bioError" style="color: red;"></span>
                                     </div>
                                 </div>
+                              
                                 <div class="col-md-4">
                                     <div class="">
-                                        <label for="">Add Image</label>
+                                        <label for="picture">Add Image</label>
                                         <br>
-                                        <input type="file" id="picture" name="picture" class="btn btn-fill btn-success"><br>
-                                        <br>
-                                        <img src='assets/img/<?php echo $img; ?>' style='width:70px; height:70px; border:groove #000'>
+                                        <!-- File input -->
+                                        <input type="file" id="picture" name="picture" class="btn btn-fill btn-success" accept="image/*" onchange="previewImage(event)">
+                                        <br><br>
+                                        
+                                        <!-- Preview image -->
+                                        <img id="imagePreview" src="assets/img/<?php echo $img; ?>" 
+                                            style="width:70px; height:70px; border:groove #000" alt="Current Image">
+                                        <span id="imageError" style="color: red;"></span>
                                     </div>
                                 </div>
+
+
                             </div>
+
                             <div class="card-footer">
                                 <button type="submit" id="btn_save" name="btn_save" class="btn btn-fill btn-primary">Update Trainer</button>
                             </div>
@@ -126,3 +141,94 @@ include "topheader.php";
 <?php
 include "footer.php";
 ?>
+
+<script>
+    function previewImage(event) {
+        const imagePreview = document.getElementById('imagePreview'); // Get the preview image element
+        const file = event.target.files[0]; // Get the selected file
+
+        if (file) {
+            const reader = new FileReader(); // Initialize FileReader
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result; // Set the preview image source to the file content
+            };
+            reader.readAsDataURL(file); // Read the file content
+        }
+    }
+
+    function validateForm() {
+        let isValid = true;
+
+        // Name validation
+        let name = document.getElementById('name').value;
+        if (name === "" || name.length < 3 || name.length > 50) {
+            document.getElementById('nameError').innerText = "Name must be between 3 and 50 characters.";
+            isValid = false;
+        } else {
+            document.getElementById('nameError').innerText = "";
+        }
+
+        // Contact validation
+        let contact = document.getElementById('contact').value;
+        if (contact === "" || isNaN(contact)) {
+            document.getElementById('contactError').innerText = "Contact must be a number.";
+            isValid = false;
+        } else {
+            document.getElementById('contactError').innerText = "";
+        }
+
+        // City validation
+        let city = document.getElementById('city').value;
+        if (city === "") {
+            document.getElementById('cityError').innerText = "City is required.";
+            isValid = false;
+        } else {
+            document.getElementById('cityError').innerText = "";
+        }
+
+        // Address validation
+        let address = document.getElementById('address').value;
+        if (address === "") {
+            document.getElementById('addressError').innerText = "Address is required.";
+            isValid = false;
+        } else {
+            document.getElementById('addressError').innerText = "";
+        }
+
+        // Experience validation
+        let experience = document.getElementById('experience').value;
+        if (experience === "") {
+            document.getElementById('experienceError').innerText = "Experience is required.";
+            isValid = false;
+        } else {
+            document.getElementById('experienceError').innerText = "";
+        }
+
+        // Bio validation
+        let bio = document.getElementById('bio').value;
+        if (bio === "") {
+            document.getElementById('bioError').innerText = "Bio is required.";
+            isValid = false;
+        } else {
+            document.getElementById('bioError').innerText = "";
+        }
+
+        // Image validation (optional)
+        let picture = document.getElementById('picture').files[0];
+        if (picture) {
+            let fileType = picture.type;
+            let fileSize = picture.size;
+            if (!["image/jpeg", "image/jpg", "image/png", "image/gif"].includes(fileType)) {
+                document.getElementById('imageError').innerText = "Only image files (jpeg, jpg, png, gif) are allowed.";
+                isValid = false;
+            } else if (fileSize > 50000000) {
+                document.getElementById('imageError').innerText = "File size must be less than 50MB.";
+                isValid = false;
+            } else {
+                document.getElementById('imageError').innerText = "";
+            }
+        }
+
+        return isValid;
+    }
+</script>

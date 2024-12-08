@@ -101,9 +101,9 @@ include "topheader.php";
                                             <td>$id</td>
                                             <td>$name</td>
                                             <td>$amount</td>
-                                            <td><img src='http://localhost/fox/fox/images/$image' style='width:50px; height:50px; border:groove #000'></td>
+                                            <td><img src='http://localhost/fox/images/$image' style='width:50px; height:50px; border:groove #000'></td>
                                             <td>$description</td>
-                                            <td>$time_duration</td>
+                                            <td>$time_duration Month</td>
                                             <td>$date</td>
                                             <td>$status</td>
                                             <td>

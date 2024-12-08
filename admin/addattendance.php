@@ -1,6 +1,7 @@
 <?php
+session_start();
 include("config.php");
-include "sidenav.php"; // This includes the sidebar
+include "sidenav.php"; 
 include "topheader.php";
 
 if (isset($_POST['submit'])) {
@@ -11,7 +12,7 @@ if (isset($_POST['submit'])) {
     $user_row = mysqli_fetch_assoc($user_result);
     $user_name = $user_row['name']; // Get the name from the query
 
-    $date = $_POST['date'];
+    $date = $_POST['date'];edituser_membership
     $check_in_time = $_POST['check_in_time'];
     $check_out_time = $_POST['check_out_time'];
     $status = $_POST['status'];
@@ -20,13 +21,14 @@ if (isset($_POST['submit'])) {
     $query = "INSERT INTO attendance (user_id, name, date, check_in_time, check_out_time, status) 
               VALUES ('$user_id','$user_name', '$date', '$check_in_time', '$check_out_time', '$status')";
     
-    if (mysqli_query($con, $query)) {
-        // Only show the alert and redirect if the query is successful
-        echo "<script>alert('Attendance added successfully'); window.location.href='manageuser.php';</script>";
-    } else {
-        // Optional: Handle query failure (you can customize the error message)
-        echo "<script>alert('Failed to add attendance: " . mysqli_error($con) . "');</script>";
-    }
+    // if (mysqli_query($con, $query)) {
+    //     // Only show the alert and redirect if the query is successful
+    //     echo "<script>alert('Attendance added successfully'); window.location.href='manageuser.php';</script>";
+    // } else {
+    //     // Optional: Handle query failure (you can customize the error message)
+    //     echo "<script>alert('Failed to add attendance: " . mysqli_error($con) . "');</script>";
+    // }
+    @header("location: manageuser.php");
 }
 ?>
 
@@ -43,7 +45,7 @@ if (isset($_POST['submit'])) {
                         <form method="post" action="">
                             <div class="form-group">
                                 <label for="user_id">Select User:</label>
-                                <select class="form-control" name="user_id" required>
+                                <select class="form-control" name="user_id" >
                                     <option value="">Choose User</option>
                                     <?php
                                     $user_result = mysqli_query($con, "SELECT id, name FROM registration");
@@ -55,23 +57,31 @@ if (isset($_POST['submit'])) {
                             </div>
 
                             <div class="form-group">
-                                <label for="date">Date:</label>
-                                <input type="date" class="form-control" name="date" required>
-                            </div>
+    <label for="date" onclick="document.getElementById('date').focus();">Date:</label>
+    <input type="date" id="date" class="form-control" name="date" >
+</div>
 
-                            <div class="form-group">
-                                <label for="check_in_time">Check-In Time:</label>
-                                <input type="time" class="form-control" name="check_in_time" required>
-                            </div>
+<div class="form-group">
+    <label for="check_in_time" onclick="document.getElementById('check_in_time').focus();">Check-In Time:</label>
+    <input type="time" id="check_in_time" class="form-control" name="check_in_time" >
+</div>
 
-                            <div class="form-group">
-                                <label for="check_out_time">Check-Out Time:</label>
-                                <input type="time" class="form-control" name="check_out_time">
-                            </div>
+<div class="form-group">
+    <label for="check_out_time" onclick="document.getElementById('check_out_time').focus();">Check-Out Time:</label>
+    <input type="time" id="check_out_time" class="form-control" name="check_out_time">
+</div>
+
+<style>
+    label {
+        cursor: pointer;
+    }
+</style>
+
+
 
                             <div class="form-group">
                                 <label for="status">Status:</label>
-                                <select class="form-control" name="status" required>
+                                <select class="form-control" name="status" >
                                     <option value="Present">Present</option>
                                     <option value="Absent">Absent</option>
                                     <option value="On Leave">On Leave</option>
@@ -89,6 +99,16 @@ if (isset($_POST['submit'])) {
 </div>
 
 <style>
+
+input[type="date"],
+input[type="time"] {
+    cursor: pointer;
+    padding: 10px; /* Increases clickable area */
+    font-size: 16px; /* Adjust font size */
+}
+
+
+
     .custom-form-container {
         margin-top: 100px; /* Adjust this value for spacing from the top */
         padding-left: 180px; /* Spacing from the sidebar */

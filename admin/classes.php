@@ -84,7 +84,7 @@ include "topheader.php";
                                     <th>Name</th>
                                     <th>Description</th>
                                     <th>Image</th>
-                                    <th>Created At</th>
+                                    <!-- <th>Created At</th> -->
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -96,11 +96,12 @@ include "topheader.php";
                                             <td>$id</td>
                                             <td>$name</td>
                                             <td>$description</td>
-                                            <td><img src='http://localhost/fox/fox/images/$img' style='width:50px; height:50px; border:groove #000'></td>
-                                            <td>" . ($created_at ? $created_at : 'No Date') . "</td>
+                                            <td><img src='http://localhost/fox/images/$img' style='width:50px; height:50px; border:groove #000'></td>
+                                            
                                             <td>$status</td>
                                             <td>";
 
+                                            // <td>" . ($created_at ? $created_at : 'No Date') . "</td>
                                     // Add the toggle button for status (Active/Inactive)
                                     if ($status == "Active") {
                                         echo "<a class='btn btn-danger' href='classes.php?id=$id&status=$status&action=toggle_status'>Disable</a>";

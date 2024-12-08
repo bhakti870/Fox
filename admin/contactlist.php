@@ -23,7 +23,7 @@ if (isset($_GET['action']) && $_GET['action'] != "" && $_GET['action'] == 'delet
     $id = $_GET['id'];
     mysqli_query($con, "DELETE FROM `contacts` WHERE id='$id'") or die("Query is incorrect...");
 }
-
+   
 // Fetch records for pagination
 $result = mysqli_query($con, "SELECT `id`, `Name`, `Email`, `Message`, `created_at` FROM `contacts` WHERE 1" . $search_query . " LIMIT $offset, $records_per_page");
 
@@ -36,8 +36,8 @@ include "topheader.php";
     <div class="container-fluid">
         <div class="col-md-14">
             <div class="float-right">
-                <a href="addcontact.php" class="btn btn-success">Add +</a>
-                <a href="contactlist.php" class="btn btn-primary">Back</a>
+                <!-- <a href="addcontact.php" class="btn btn-success">Add +</a> -->
+                <!-- <a href="contactlist.php" class="btn btn-primary">Back</a> -->
                 <br><br><br>
             </div>
             <div class="card">
@@ -78,8 +78,8 @@ include "topheader.php";
                                             <td>$message</td>
                                             <td>$created_at</td>
                                             <td>
-                                                <a class='btn btn-success' href='editcontact.php?id=$id&action=edit'>Edit</a>
-                                                <a class='btn btn-danger' href='contacts.php?id=$id&action=delete'>Delete</a>
+                                                
+                                                <a class='btn btn-danger' href='contactlist.php?id=$id&action=delete'>Delete</a>
                                             </td>
                                         </tr>";
                                 }

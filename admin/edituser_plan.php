@@ -1,76 +1,86 @@
 <?php
 session_start();
 include("config.php");
-$id=$_REQUEST['id'];
 
-$result=mysqli_query($con,"SELECT `id`, `Name`, `Email`, `Number`, `Message`, `Rating` FROM `user_plan` WHERE id=$id");
+// Get the ID from the request
+$id = $_REQUEST['id'];
 
-list($id,$Name,$Email,$Number,$Message,$Rating)=mysqli_fetch_array($result);
+// Fetch existing data for the provided ID
+$result = mysqli_query($con, "SELECT `id`, `Exercise`, `Equipment`, `Reps` FROM `workout` WHERE id = $id");
+$row = mysqli_fetch_assoc($result);
 
-if(isset($_POST['edit'])) 
-{
-  $Name=$_POST['Name'];
-  $Email=$_POST['Email'];
-  $Number=$_POST['Number'];
-  $Message=$_POST['Message'];
-  $Rating=$_POST['Rating'];
+$Exercise = $row['Exercise'];
+$Equipment = $row['Equipment'];
+$Reps = $row['Reps'];
 
-  mysqli_query($con,"UPDATE `user_plan` SET `Name`='$Name',`Email`='$Email',`Number`='$Number',`Message`='$Message',`Rating`='$Rating' WHERE id=$id")or die("Query 2 is incorrect..........");
+// Handle the form submission
+if (isset($_POST['edit'])) {
+    $Exercise = $_POST['Exercise'];
+    $Equipment = $_POST['Equipment'];
+    $Reps = $_POST['Reps'];
 
-  header("location: user_plan.php");
-  mysqli_close($con);
+    // Update the workout record in the database
+    $update_query = "UPDATE `workout` SET `Exercise`='$Exercise', `Equipment`='$Equipment', `Reps`='$Reps' WHERE id=$id";
+    if (mysqli_query($con, $update_query)) {
+        header("location: user_plan.php");
+        exit();
+    } else {
+        die("Error updating record: " . mysqli_error($con));
+    }
+
+    mysqli_close($con);
 }
+
+// Include navigation and header files
 include "sidenav.php";
 include "topheader.php";
 ?>
-      <!-- End Navbar -->
-      <div class="content">
-        <div class="container-fluid">
-          <div class="card">
+
+<!-- Form UI for Editing the Workout Plan -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="card">
             <div class="card-header card-header-primary">
-              <h5 class="title">Edit User Plan</h5>
+                <h5 class="title">Edit Workout Plan</h5>
             </div>
-            <form action="edituser_plan.php" name="form" method="post" enctype="multipart/form-data">
-            <div class="card-body">
-              <input type="hidden" name="id" id="id" value="<?php echo $id;?>" />
-              <div class="col-md-12 ">
-                <div class="form-group">
-                  <label>Name</label>
-                  <input type="text" id="Name" name="Name"  class="form-control" value="<?php echo $Name; ?>" >
+            <form action="edituser_plan.php" name="form" method="post">
+                <div class="card-body">
+                    <input type="hidden" name="id" id="id" value="<?php echo $id; ?>" />
+                    
+                    <!-- Exercise Field -->
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Exercise</label>
+                            <input type="text" id="Exercise" name="Exercise" class="form-control" value="<?php echo $Exercise; ?>" >
+                        </div>
+                    </div>
+                    
+                    <!-- Equipment Field -->
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Equipment</label>
+                            <input type="text" id="Equipment" name="Equipment" class="form-control" value="<?php echo $Equipment; ?>" >
+                        </div>
+                    </div>
+                    
+                    <!-- Reps Field -->
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Reps</label>
+                            <input type="text" id="Reps" name="Reps" class="form-control" value="<?php echo $Reps; ?>" >
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="col-md-12 ">
-                <div class="form-group">
-                  <label>Email</label>
-                  <input type="email" id="Email" name="Email" class="form-control" value="<?php echo $Email; ?>">
+                
+                <!-- Submit Button -->
+                <div class="card-footer">
+                    <button type="submit" id="btn_save" name="edit" class="btn btn-fill btn-primary">Update</button>
                 </div>
-              </div>
-              <div class="col-md-12 ">
-                <div class="form-group">
-                  <label>Number</label>
-                  <input type="number" id="Number" name="Number" class="form-control" value="<?php echo $Number; ?>">
-                </div>
-              </div>
-              <div class="col-md-12 ">
-                <div class="form-group">
-                  <label>Message</label>
-                  <textarea name="Message" id="Message" class="form-control" ><?php echo $Message; ?></textarea>
-                </div>
-              </div>
-              <div class="col-md-12 ">
-                <div class="form-group">
-                  <label>Rating</label>
-                  <input type="number" id="Rating" name="Rating" class="form-control" value="<?php echo $Rating; ?>">
-                </div>
-              </div>
-            </div>
-            <div class="card-footer">
-              <button type="submit" id="btn_save" name="edit" class="btn btn-fill btn-primary">Update</button>
-            </div>
-            </form>    
-          </div>
+            </form>
         </div>
-      </div>
+    </div>
+</div>
+
 <?php
 include "footer.php";
 ?>

@@ -94,7 +94,7 @@ include "topheader.php";
                                             <td>$weight</td>
                                             <td>$gender</td>
                                             <td>$classes</td>
-<td><img src='http://localhost/fox/fox/images/$image' style='width:50px; height:50px; border:groove #000'></td>
+                                            <td><img src='http://localhost/fox/images/$image' style='width:50px; height:50px; border:groove #000'></td>
                                             <td>$created_at</td>
                                             <td>
                                                 <a class='btn btn-success' href='editprofile.php?id=$id&action=edit'>Edit</a>

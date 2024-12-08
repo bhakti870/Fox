@@ -9,7 +9,6 @@ if (!isset($_REQUEST['id'])) {
 $id = intval($_REQUEST['id']); // Ensure $id is an integer
 
 // Debug: Check the user ID
-echo "User ID: $id<br>";
 
 // Fetch user details from the database
 $user_result = mysqli_query($con, "SELECT `id`, `name` FROM `attendance` WHERE id=$id");
@@ -19,7 +18,6 @@ if (!$user_result) {
 }
 
 // Debug: Print the number of rows returned
-echo "Number of user records found: " . mysqli_num_rows($user_result) . "<br>";
 
 if (mysqli_num_rows($user_result) == 0) {
     die("User not found.");
@@ -71,12 +69,13 @@ if (isset($_POST['edit'])) {
             die("Error updating attendance: " . mysqli_error($con));
         }
 
-        // Redirect to manageuser.php after successful update
-        header("Location: manageuser.php");
         exit; // Ensure no further code is executed after redirection
     } else {
         die("Error updating user details: " . mysqli_error($con));
     }
+    
+        // Redirect to manageuser.php after successful update
+        header("Location: manageuser.php");
 }
 
 mysqli_close($con);
@@ -129,10 +128,11 @@ include "topheader.php";
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer">
+                        <div class="card-footer">
                         <button type="submit" id="btn_save" name="edit" class="btn btn-fill btn-primary">Update</button>
                     </div>
+                    </div>
+                  
                 </form>    
             </div>
         </div>         

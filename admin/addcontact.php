@@ -32,8 +32,8 @@ if(isset($_POST['btn_save'])) {
     
 
     if (count($errors) == 0) {
-        $stmt = $con->prepare("INSERT INTO `contacts`(`Name`, `Email`, `Message`) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $Name, $Email, $Message);
+        $stmt = $con->prepare("INSERT INTO `contacts`(`Name`, `Email`, `Message`) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $Name, $Email, $Message);
 
         $stmt->execute();
 
@@ -51,6 +51,10 @@ if(isset($_POST['btn_save'])) {
   <div class="container-fluid">
     <!-- your content here -->
     <div class="col-md-12">
+    <div class="float-right">
+                <a href="contactlist.php" class="btn btn-primary">Back</a>
+                <br><br><br>
+            </div>
         <div class="card">
           <div class="card-header card-header-primary">
             <h4 class="card-title">Add Contact</h4>
@@ -65,7 +69,7 @@ if(isset($_POST['btn_save'])) {
                 </div>
                <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group bmd-form-group">
+                  <div class="form-group">
                     <label class="bmd-label-floating">Name</label>
                     <input type="text" name="Name" id="Name" class="form-control">
                     <?php if (isset($errors) && in_array("Name is required", $errors)) { ?>
@@ -81,7 +85,7 @@ if(isset($_POST['btn_save'])) {
               </div>
                <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group bmd-form-group">
+                  <div class="form-group">
                     <label class="bmd-label-floating">Email</label>
                     <input type="email" name="Email" id="Email" class="form-control">
                     <?php if (isset($errors) && in_array("Email is required", $errors)) { ?>
@@ -93,7 +97,7 @@ if(isset($_POST['btn_save'])) {
                 </div>
                 
                 <div class="col-md-12">
-                  <div class="form-group bmd-form-group">
+                  <div class="form-group">
                     <label class="bmd-label-floating">Message</label>
                     <textarea name="Message" id="Message" class="form-control"></textarea>
                     <?php if (isset($errors) && in_array("Message is required", $errors)) { ?>

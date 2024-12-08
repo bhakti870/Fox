@@ -6,7 +6,7 @@ include "topheader.php";
 
 if (isset($_POST['btn_save'])) {
     // Retrieve data from POST request
-    $ID = $_POST['id'];
+    // $ID = $_POST['id'];
     $Name = $_POST['name'];
     $Weight = $_POST['weight'];
     $Goal = $_POST['goal'];
